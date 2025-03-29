@@ -24,12 +24,13 @@ else:
 ## (2) segunda parte - buscar todos os links da pagina
 
 pdf_links = []
+anex_names = ("Anexo_I_Rol_2021RN_465.2021_RN627L.2024.pdf", "Anexo_II_DUT_2021_RN_465.2021_RN628.2025_RN629.2025.pdf")
 
 # loop que busca todas as tags de link do html 
 # e se tiver href de um pdf, adiciona o link no array
 for link in soup.find_all("a", href=True):
     href = link["href"]
-    if href.endswith(".pdf"):
+    if href.endswith(anex_names):
         pdf_links.append(href)
 
 # mostra na tela os links encontrados
@@ -60,3 +61,8 @@ for pdf_url in pdf_links:
         print(f"Arquivo baixado! -> {file_name}")
     else:
         print(f"ERRO! Não foi possível baixar {pdf_url}")
+
+# uso da lib shutil para zipar os arquivos pdf baixados do GOV
+shutil.make_archive("anexos", 'zip', "downloads")
+
+print("seus arquivos foram compactados em: downloads/anexos.zip!")

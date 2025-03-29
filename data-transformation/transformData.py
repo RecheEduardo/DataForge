@@ -3,6 +3,8 @@ import os
 import pdfplumber
 # pandas para manipulacao e analise de dados
 import pandas as pd
+# shutil para operar arquivos, será utilizada para compactação
+import shutil
 
 
 # (1) primeira parte - extração dos dados das tabelas do anexo I
@@ -64,3 +66,14 @@ df.to_csv(csv_file, index=False, encoding="utf-8")
 # index=false remove existência de possíveis índices
 
 print(f"Dados salvos em {csv_file}")
+
+
+# (4) quarta parte - salva a planilha csv num arquivo compactado
+
+os.makedirs("downloads", exist_ok=True) # cria o diretorio para zipar o arquivo
+zip_name = os.path.join("downloads", "Teste_EduardoReche")
+
+# grava o csv num arquivo .zip
+shutil.make_archive(zip_name, "zip", "output", "dados_transformados.csv")
+
+print("Arquivo compactado em: 'Teste_EduardoReche.zip'")

@@ -1,5 +1,8 @@
+import os
 # lib pdfplumber para pegar info de arquivos PDF
 import pdfplumber
+# pandas para manipulacao e analise de dados
+import pandas as pd
 
 
 # (1) primeira parte - extração dos dados das tabelas do anexo I
@@ -48,3 +51,16 @@ for row in data:
         # se o dado for igual a abreviação, sera substituido
         if cell in abreviacoes:
             row[i] = abreviacoes[cell]
+
+
+# (3) terceira parte - salvar os dados obtidos em um arquivo csv
+
+os.makedirs("output", exist_ok=True) # cria o diretorio para salvar o csv
+csv_file = os.path.join("output", "dados_transformados.csv")
+
+# usando o DataFrame do pandas para extrair um csv da lista de dados
+df = pd.DataFrame(data, columns=header)  # utiliza o header para definir os cabecalhos do csv
+df.to_csv(csv_file, index=False, encoding="utf-8")
+# index=false remove existência de possíveis índices
+
+print(f"Dados salvos em {csv_file}")

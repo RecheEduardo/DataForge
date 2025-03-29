@@ -1,11 +1,11 @@
-import requests
 import os
-
+# lib para requisições HTTP
+import requests
 # lib de acesso aos dados do html do GOV
 from bs4 import BeautifulSoup
-
 # lib para operar arquivos, será utilizada para compactação
 import shutil
+
 
 ## (1) primeira parte - acesso para a pagina do GOV
 

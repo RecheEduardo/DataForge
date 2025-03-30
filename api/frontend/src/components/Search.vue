@@ -45,7 +45,7 @@
 <template>
   <div class="container my-5">
     <div class="input-group mb-3">
-        <input type="text" v-model="query" placeholder="Digite um nome..." class="form-control fs-5" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" v-model="query" placeholder="Modalidade do cadastro..." class="form-control fs-5" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button class="btn btn-success fw-bold fs-5" @click="search" type="button" id="button-addon2">Buscar</button>
     </div>
     <!-- tabela aonde os elementos irão ser exibidos -->

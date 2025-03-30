@@ -1,11 +1,16 @@
 # flask utilizado para criar as rotas do servidor de busca
 from flask import Flask, request, jsonify
 
+from flask_cors import CORS
+
 # pandas para analisar os dados do csv e retorná-los via api
 import pandas as pd
 
 # cria a aplicacao flask
 app = Flask(__name__)
+
+# Adicione o CORS para permitir requisições de qualquer origem
+CORS(app)
 
 # carrega os dados do csv para um dataframe do pandas
 # transformando o arquivo em uma tabela dentro do python
@@ -26,10 +31,17 @@ def search():
         # na=False   - evita erro caso tenha valores nulos na coluna
         
         # transforma os dados filtrados em uma lista de dicionarios
-        results = filtered.to_dict(orient='records')
+        records = filtered.to_dict(orient='records')
+
+        # tratamento de dados: 
+        # itera sobre os registros e substitui cada valor NaN por uma string vazia('')
+        cleaned_records = [
+            { key: ('' if pd.isna(value) else value) for key, value in record.items() }
+            for record in records
+        ]
         
         # pega a lista de dicionario e retorna convertendo pro formato json
-        return jsonify(results)
+        return jsonify(cleaned_records)
     
     # se nao tiver query nenhuma, retorna lista vazia
     return jsonify([])

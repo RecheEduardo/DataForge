@@ -6,9 +6,8 @@ import zipfile
 
 
 # diretorios de download dos arquivos csv
-base_dir = os.path.join("database", "downloads")
-demo_dir = os.path.join(base_dir, "demonstrativos_contabeis")
-operadoras_dir = os.path.join(base_dir, "operadoras")
+demo_dir = os.path.join("downloads", "demonstrativos_contabeis")
+operadoras_dir = os.path.join("downloads", "operadoras")
 
 # criando diretorio
 os.makedirs(demo_dir, exist_ok=True)

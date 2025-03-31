@@ -41,6 +41,11 @@
         }
     })
 
+    const cleanUp = (): void => {
+        results.value = []
+        query.value = ''
+    }
+
     const search = async (): Promise<void> => {
 
         loading.value = true 
@@ -88,7 +93,10 @@
 
     <!-- opcao de selecionar o tipo de busca -->
     <div class="pb-3 mb-3 border-bottom">
-        <h1 class="text-muted mt-4 mb-3 fadeInUp">Busca de cadastros</h1>
+        <div class="d-flex justify-content-between align-items-center border-bottom mt-4 mb-3">
+            <h1 class="text-muted mb-3 fadeInUp">Busca de cadastros</h1>
+            <button class="btn fs-4 btn-secondary text-light fw-bold" @click="cleanUp">Limpar</button>
+        </div>
         <select v-model="searchType" class="form-select fs-5 fadeInUp">
             <option value="modalidade">Modalidade</option>
             <option value="uf">UF</option>

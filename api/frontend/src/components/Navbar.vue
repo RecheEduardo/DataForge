@@ -5,10 +5,10 @@
             DataForge
         </h1>
         <div class="d-flex gap-4 align-items-center mb-0 list-unstyled fs-1">
-            <a href="https://www.linkedin.com/in/eduardorechemartins/" class="text-light fadeInDown">
+            <a href="https://github.com/RecheEduardo" target="_blank" class="text-light fadeInDown upScale">
                 <i class="fa-brands fa-square-github"></i>
             </a>
-            <a href="https://github.com/RecheEduardo" class="text-light fadeInDown">
+            <a href="https://www.linkedin.com/in/eduardorechemartins/" target="_blank" class="text-light fadeInDown upScale">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
         </div>

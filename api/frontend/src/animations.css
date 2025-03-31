@@ -46,6 +46,13 @@
 }
 
 
+.upScale{
+    transition: .25s;
+}.upScale:hover{
+    scale: 1.1;
+    transition: .25s;
+}
+
 .popIn{
     animation: popIn 2s !important;
 }

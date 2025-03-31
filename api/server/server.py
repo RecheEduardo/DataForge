@@ -70,15 +70,15 @@ def search_UF():
     
     return jsonify([])
 
-@app.route('/searchRegiao', methods=['GET'])
-def search_Regiao():
+@app.route('/searchRepresentante', methods=['GET'])
+def search_Representante():
     # tratamento de dados - pega o que foi passado na url como query e remove espaços
     query = request.args.get('query', '').strip()
     
     # verifica se foi passado alguma coisa na query
     if query:
-        # filtra os dados buscando na coluna 'Regiao' todas as linhas que contem a query
-        filtered = data[data['Regiao_de_Comercializacao'].str.contains(query, case=False, na=False)]
+        # filtra os dados buscando na coluna 'Representante' todas as linhas que contem a query
+        filtered = data[data['Representante'].str.contains(query, case=False, na=False)]
 
         records = filtered.to_dict(orient='records')
 

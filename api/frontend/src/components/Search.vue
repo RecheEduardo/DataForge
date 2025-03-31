@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { ref, computed } from 'vue'
     import axios from 'axios'
 
     // interface para garantir a tipagem correta
@@ -25,6 +25,22 @@
     // array de elementos da interface "Operadora"
     const results = ref<Operadora[]>([])
 
+
+    // uso do computed para mudar o placeholder do input
+    // conforme alteração do option
+    const placeholderText = computed(() => {
+        switch (searchType.value) {
+            case 'modalidade':
+            return 'Digite a modalidade desejada...'
+            case 'uf':
+            return 'Informe o estado (ex: SP, RJ, MG)...'
+            case 'representante':
+            return 'Pesquise pelo nome do representante..'
+            default:
+            return 'Digite sua pesquisa...'
+        }
+    })
+
     const search = async (): Promise<void> => {
 
         loading.value = true 
@@ -34,8 +50,8 @@
             endpoint = 'http://127.0.0.1:5000/searchModalidade'
         } else if (searchType.value === 'uf') {
             endpoint = 'http://127.0.0.1:5000/searchUF'
-        } else if (searchType.value === 'regiao') {
-            endpoint = 'http://127.0.0.1:5000/searchRegiao'
+        } else if (searchType.value === 'representante') {
+            endpoint = 'http://127.0.0.1:5000/searchRepresentante'
         }
 
         try {
@@ -75,13 +91,13 @@
       <select v-model="searchType" class="form-select fs-5">
         <option value="modalidade">Modalidade</option>
         <option value="uf">UF</option>
-        <option value="regiao">Região de Comercialização</option>
+        <option value="representante">Representante</option>
       </select>
     </div>
 
     <!-- campo de pesquisa da consulta -->
     <div class="input-group mb-3">
-      <input type="text" v-model="query" placeholder="Digite o termo de pesquisa..." class="form-control fs-5" aria-label="Search query">
+      <input type="text" v-model="query" :placeholder="placeholderText" id="search-bar" class="form-control fs-5" aria-label="Search query">
       <button class="btn btn-success fw-bold fs-5" @click="search" type="button">Buscar</button>
     </div>
 

@@ -84,41 +84,54 @@
 </script>
 
 <template>
-  <div class="container my-5">
+  <div class="container popUp">
 
     <!-- opcao de selecionar o tipo de busca -->
-    <div class="mb-3">
-      <select v-model="searchType" class="form-select fs-5">
-        <option value="modalidade">Modalidade</option>
-        <option value="uf">UF</option>
-        <option value="representante">Representante</option>
-      </select>
+    <div class="pb-3 mb-3 border-bottom">
+        <h1 class="text-muted mt-4 mb-3 fadeInUp">Busca de cadastros</h1>
+        <select v-model="searchType" class="form-select fs-5 fadeInUp">
+            <option value="modalidade">Modalidade</option>
+            <option value="uf">UF</option>
+            <option value="representante">Representante</option>
+        </select>
     </div>
 
     <!-- campo de pesquisa da consulta -->
-    <div class="input-group mb-3">
-      <input type="text" v-model="query" :placeholder="placeholderText" id="search-bar" class="form-control fs-5" aria-label="Search query">
-      <button class="btn btn-success fw-bold fs-5" @click="search" type="button">Buscar</button>
+    <div class="input-group mb-3 popIn">
+        <input type="text" v-model="query" :placeholder="placeholderText" id="search-bar" class="form-control fs-4" aria-label="Search query">
+        <button class="btn btn-success fw-bold fs-4" @click="search" type="button">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        Buscar
+        </button>
     </div>
 
     <!-- tela de loading durante a busca -->
     <div v-if="loading">
-      <h2 class="text-secondary">Carregando...</h2>
+        <p class="text-muted text-center fs-1">Carregando...</p>
     </div>
 
     <!-- tabela aonde os elementos irao ser exibidos no final da busca -->
     <div v-else-if="results.length">
-        <table class="table table-hover table-striped table-bordered">
+        <table class="table table-hover table-striped table-bordered popUp">
             <thead class="table-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Representante</th>
+                    <th scope="col">
+                        <i class="fa-solid fa-hashtag"></i>
+                    </th>
+                    <th scope="col">
+                        <i class="fa-solid fa-user"></i>
+                        Representante
+                    </th>
                     <th scope="col">Razão Social</th>
                     <th scope="col">Modalidade</th>
-                    <th scope="col">Cidade</th>
+                    <th scope="col">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        Cidade
+                    </th>
                     <th scope="col">UF</th>
                 </tr>
             </thead>
+
             <tbody>
             <!-- loop de iteração acessa e exibe os dados da interface -->
                 <tr v-for="(item, index) in results" :key="index">

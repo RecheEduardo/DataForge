@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "cebca36a-dd28-4cc6-bd21-28cc244ad4f5",
+		"name": "⚙️ API Operadoras",
+		"description": "# 📝 Documentação API de Operadoras GOV\n\nEduardo Reche Martins\n\n## Introdução\n\n1. A API permite acessar o arquivo CSV de cadastro das operadoras da base de dados do GOV e retornar os valores conforme parâmetro de busca e rota desejada (Modalidade, UF e Representante).\n    \n2. Caso tenha interesse em consultar o arquivo base, o download do mesmo se encontra em: [Base de Dados GOV](https://dadosabertos.ans.gov.br/FTP/PDA/operadoras_de_plano_de_saude_ativas/Relatorio_cadop.csv)\n    \n3. A API é executada localmente (utilizando localhost) e responde a requisição em formato JSON.\n    \n\n## Endereço Base\n\n```\nhttp://localhost:5000\n\n ```\n\n## Instalação e Execução\n\n### 1\\. Clone o repositório - [Link](https://github.com/RecheEduardo/DataForge)\n\n### 2\\. Requisitos de Sistema\n\n- Python 3.x instalado\n    \n- Biblioteca Flask e Flask-CORS (API) instaladas\n    \n- Biblioteca Pandas, Requests, BeatifulSoup e PDFplumber instaladas ( Data Scraping e Downloads )\n    \n\n### 3\\. Instalação das Dependências\n\nExecute o seguinte comando para instalar as dependências necessárias:\n\n```\npip install flask flask-cors pandas requests beautifulsoup4 pdfplumber\n\n ```\n\n### 4\\. Execução dos Scripts de Python\n\nExecute o seguinte scrip em DataForge/database/downloadData.py para instalar as planilhas necessárias:\n\n``` python\npy downloadData.py\n\n ```\n\n### 5\\. Estrutura do Projeto base onde a API é consumida\n\n```\nDataForge/\n├─ api/\n│  ├─ frontend/\n│  ├─ server/\n│  │  └─ server.py\n├─ database/\n│  ├─ downloads/\n│  │  └─ operadoras/\n│  │     └─ Relatorio_cadop.csv\n│  ├─ scripts/\n│  └─ downloadData.py\n└─ .gitignore\n\n ```\n\n### 6\\. Executando o Servidor\n\nPara iniciar o servidor Flask, execute o seguinte comando no diretório `server/`:\n\n```\npython server.py\n\n ```\n\nO servidor será iniciado em `http://localhost:5000`.\n\n## Rotas Disponíveis\n\n### 1\\. Buscar por Modalidade\n\n**Endpoint:**\n\n```\nGET /searchModalidade?query=<nome_da_modalidade>\n\n ```\n\n**Parâmetro:**\n\n- `query`: Nome parcial ou completo da modalidade desejada.\n    \n\n**Exemplo de Requisição:**\n\n```\nGET http://localhost:5000/searchModalidade?query=Medicina\n\n ```\n\n**Resposta:**\n\n``` json\n[\n    {\n        \"CNPJ\": \"12345678901234\",\n        \"Nome\": \"Operadora Exemplo\",\n        \"Modalidade\": \"Medicina de Grupo\",\n        \"UF\": \"SP\",\n        \"Representante\": \"João Silva\"\n    }\n]\n\n ```\n\n### 2\\. Buscar por UF\n\n**Endpoint:**\n\n```\nGET /searchUF?query=<sigla_da_UF>\n\n ```\n\n**Parâmetro:**\n\n- `query`: Sigla do estado (UF) desejado.\n    \n\n**Exemplo de Requisição:**\n\n```\nGET http://localhost:5000/searchUF?query=SP\n\n ```\n\n**Resposta:**\n\n``` json\n[\n    {\n        \"CNPJ\": \"12345678901234\",\n        \"Nome\": \"Operadora Exemplo\",\n        \"Modalidade\": \"Medicina de Grupo\",\n        \"UF\": \"SP\",\n        \"Representante\": \"João Silva\"\n    }\n]\n\n ```\n\n### 3\\. Buscar por Representante\n\n**Endpoint:**\n\n```\nGET /searchRepresentante?query=<nome_do_representante>\n\n ```\n\n**Parâmetro:**\n\n- `query`: Nome parcial ou completo do representante.\n    \n\n**Exemplo de Requisição:**\n\n```\nGET http://localhost:5000/searchRepresentante?query=Joao\n\n ```\n\n**Resposta:**\n\n``` json\n[\n    {\n        \"CNPJ\": \"12345678901234\",\n        \"Nome\": \"Operadora Exemplo\",\n        \"Modalidade\": \"Medicina de Grupo\",\n        \"UF\": \"SP\",\n        \"Representante\": \"João Silva\"\n    }\n]\n\n ```\n\n## Considerações Finais\n\n- Os valores `NaN` no CSV são substituídos por strings vazias (`\"\"`) na resposta JSON.\n    \n- A pesquisa é **case-insensitive (porém considera acentos em nomes, por exemplo)**.\n    \n- Caso não sejam encontrados resultados para a consulta, a API retorna uma lista vazia `[]`.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43634909",
+		"_collection_link": "https://eduardoreche-1338378.postman.co/workspace/e5a941a9-fd9d-49b0-8bb2-75e6da91b39f/collection/43634909-cebca36a-dd28-4cc6-bd21-28cc244ad4f5?action=share&source=collection_link&creator=43634909"
+	},
+	"item": [
+		{
+			"name": "Pesquisa por Modalidade",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/searchModalidade?query=Filantropia",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"searchModalidade"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Filantropia"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Pesquisa por UF",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/searchUF?query=RJ",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"searchUF"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "RJ"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Pesquisa por Representante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var template = `",
+							"<canvas id=\"myChart\" height=\"75\"></canvas>",
+							"",
+							"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js\"></script> ",
+							"",
+							"<script>",
+							"    var ctx = document.getElementById(\"myChart\");",
+							"",
+							"    var myChart = new Chart(ctx, {",
+							"        type: \"bar\",",
+							"        data: {",
+							"            labels: [\"Representante\", \"Razao_Social\", \"Modalidade\", \"Regiao_de_Comercializacao\"], // Add relevant labels here",
+							"            datasets: [{",
+							"                data: [0, 0, 0, 0], // Add relevant data here",
+							"                ",
+							"                // Change these colours to customize the chart",
+							"                backgroundColor: [\"#003f5c\", \"#58508d\", \"#bc5090\", \"#ff6361\"],",
+							"            }]",
+							"        },",
+							"        options: {",
+							"            legend: { display: false },",
+							"            title: {",
+							"                display: true,",
+							"                text: 'Representante Data'",
+							"            },",
+							"            scales: {",
+							"                xAxes: [{",
+							"                    display: true,",
+							"                    scaleLabel: {",
+							"                        display: true,",
+							"                        labelString: 'Items'",
+							"                    }",
+							"                }],",
+							"                yAxes: [{",
+							"                    display: true,",
+							"                    scaleLabel: {",
+							"                        display: true,",
+							"                        labelString: 'Count'",
+							"                    }",
+							"                }]",
+							"            }",
+							"        }",
+							"",
+							"    });",
+							"",
+							"    // Access the data passed to pm.visualizer.set() from the JavaScript",
+							"    // code of the Visualizer template",
+							"    pm.getData(function (err, value) {",
+							"        myChart.data.datasets[0].data = [",
+							"            value.response[0].Representante,",
+							"            value.response[0].Razao_Social,",
+							"            value.response[0].Modalidade,",
+							"            value.response[0].Regiao_de_Comercializacao",
+							"        ];",
+							"        myChart.update();",
+							"    });",
+							"",
+							"</script>`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    var res = pm.response.json();",
+							"    ",
+							"    var visualizerData = res;",
+							"    ",
+							"    return {response: visualizerData};",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/searchRepresentante?query=Carlos",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"searchRepresentante"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Carlos"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}

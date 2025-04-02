@@ -6,6 +6,8 @@
 
 <h1 align="center">🚀 Plataforma Integrada de Dados de Saúde do GOV</h1>
 
+<img src="https://github.com/RecheEduardo/DataForge/blob/main/api/frontend/src/assets/screenshot.png?raw=true">
+
 # 1. Sobre o Projeto 📊
 
 O projeto do **DataForge** é uma solução completa para a manipulação e análise de dados na área da saúde, integrando diversas tecnologias para oferecer funcionalidades que vão desde a extração e transformação de dados até o fornecimento de uma API REST e uma interface interativa.

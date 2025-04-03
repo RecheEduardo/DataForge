@@ -4,6 +4,12 @@
 
 ---
 
+# ⬇🖥 VÍDEO DO EXPLICATIVO COMPLETO DO PROJETO 🖥⬇
+
+<h3><a href="https://youtu.be/clrwh3pMDpY" target="_blank">CLIQUE AQUI PARA ACESSAR O VÍDEO DE EXPLICAÇÃO DO PROJETO!</a></h3>
+
+---
+
 <h1 align="center">🚀 Plataforma Integrada de Dados de Saúde do GOV</h1>
 
 <img src="https://github.com/RecheEduardo/DataForge/blob/main/api/frontend/src/assets/screenshot.png?raw=true">
